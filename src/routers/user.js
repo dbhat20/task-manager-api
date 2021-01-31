@@ -77,6 +77,7 @@ router.get('/users/me', auth, async (req, res) => {
           res.status(500).send(e)
       }
 })
+
 // REST API - Read an User from user DB - NOT A USEFUL API
 router.get('/users/:id', async (req, res) => {
     const _id = req.params.id
