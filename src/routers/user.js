@@ -153,6 +153,7 @@ router.post('/users/me/avatar', auth, upload.single('uploadVar'), async (req,res
     
     //req.user.avatar = req.file.buffer //remove dest from multer so that multer doesn't store the file but pass it through to the function
     req.user.avatar = buffer
+    //console.log('Buffer:', buffer)
     await req.user.save()
     res.status(200).send()
 }, (error, req, res, next) => {
