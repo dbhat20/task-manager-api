@@ -36,6 +36,8 @@ router.post('/users/login', async (req, res) => {
 //REST API - Allow a user to logout
 router.post('/users/logout', auth, async (req, res) => {
     try {
+        // Remove the token that was sent, or keep the tokens 
+        //that dont match this token (they may be from other sessions)
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
         })
@@ -72,7 +74,9 @@ router.get('/users', auth, async (req, res) => {
 // REST API - Read your profile
 router.get('/users/me', auth, async (req, res) => {
       try{
-        res.send(req.user)  //since user was added to req, no need to find the user again. Just use req.user
+        // Since user was added to req (by auth), no need to find the user again. 
+        // Just use req.user
+        res.send(req.user)  
       } catch (e) {
           res.status(500).send(e)
       }
